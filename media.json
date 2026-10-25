@@ -1,0 +1,27 @@
+{
+  "Demo_01.mp4": {
+    "title": "Play film demo",
+    "type": "video",
+    "src": "Demo_01.mp4"
+  },
+  "Demo_02.mp4": {
+    "title": "Color + atmosphere",
+    "type": "video",
+    "src": "Demo_02.mp4"
+  },
+  "E01.mp3": {
+    "title": "Interview I01",
+    "type": "audio",
+    "src": "E01.mp3"
+  },
+  "E02.mp3": {
+    "title": "Interview I03",
+    "type": "audio",
+    "src": "E02.mp3"
+  },
+  "E03.mp3": {
+    "title": "Interview I04",
+    "type": "audio",
+    "src": "E03.mp3"
+  }
+}
