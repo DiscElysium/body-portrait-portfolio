@@ -1,10 +1,11 @@
 'use strict';
-const pageTitles = ['Overview','Research','Choices + AI','Physical interaction','Exhibition'];
+const pageTitles = ['Overview','Personal choices','AI director crew','Physical interaction','Exhibition'];
 const pageDialog = document.querySelector('#page-dialog');
 const zoomImage = document.querySelector('#zoom-image');
 const stage = document.querySelector('.image-stage');
 const zoomLevel = document.querySelector('#zoom-level');
 let currentPage = 0;
+let p4Variant = "A";
 let scale = 1;
 let mediaData = {};
 const mediaReady = fetch('media.json').then(response => {
@@ -17,7 +18,7 @@ function fitScale(){return Math.min(1, (pageDialog.clientWidth - (innerWidth < 6
 function setScale(value){scale = Math.max(.12, Math.min(2,value));zoomImage.style.width = Math.round(2520 * scale) + 'px';zoomLevel.value = Math.round(scale * 100) + '%';}
 function showPage(index){
   currentPage = Math.max(0, Math.min(4,index));
-  zoomImage.src = `page-${String(currentPage+1).padStart(2,'0')}.png`;
+  zoomImage.src = currentPage === 3 ? `page-04-${p4Variant}.png?v=20261103` : `page-${String(currentPage+1).padStart(2,'0')}.png?v=20261103`;
   zoomImage.alt = `Page ${currentPage+1}: ${pageTitles[currentPage]}`;
   document.querySelector('#zoom-title').textContent = `${String(currentPage+1).padStart(2,'0')} / ${pageTitles[currentPage]}`;
   document.querySelector('#prev-page').disabled = currentPage === 0;
@@ -73,3 +74,5 @@ function updateProgress(){
   links.forEach(link => {if(link.dataset.section === active)link.setAttribute('aria-current','true');else link.removeAttribute('aria-current');});
 }
 addEventListener('scroll',updateProgress,{passive:true});addEventListener('resize',updateProgress);updateProgress();
+
+ document.querySelectorAll('[data-p4-variant]').forEach(button=>button.addEventListener('click',()=>{p4Variant=button.dataset.p4Variant;document.querySelectorAll('[data-p4-variant]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const src=`page-04-${p4Variant}.png?v=20261103`;document.querySelector('#tangible .page-canvas>img').src=src;document.querySelectorAll('#tangible [data-page]').forEach(a=>a.href=src);if(pageDialog.open&&currentPage===3)showPage(3);}));
