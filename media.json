@@ -23,5 +23,20 @@
     "title": "Interview I04",
     "type": "audio",
     "src": "E03.mp3"
+  },
+  "Promo_No3.mp4": {
+    "title": "Film 03 / Match Diary",
+    "type": "video",
+    "src": "Promo_No3.mp4?v=20261104-p4"
+  },
+  "Promo_No4.mp4": {
+    "title": "Film 04 / Tidal Current Movement",
+    "type": "video",
+    "src": "Promo_No4.mp4?v=20261104-p4"
+  },
+  "Promo_No5.mp4": {
+    "title": "Film 05 / Anime Tennis",
+    "type": "video",
+    "src": "Promo_No5.mp4?v=20261104-p4"
   }
 }

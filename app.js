@@ -5,10 +5,9 @@ const zoomImage = document.querySelector('#zoom-image');
 const stage = document.querySelector('.image-stage');
 const zoomLevel = document.querySelector('#zoom-level');
 let currentPage = 0;
-let p4Variant = "A";
 let scale = 1;
 let mediaData = {};
-const mediaReady = fetch('media.json').then(response => {
+const mediaReady = fetch('media.json?v=20261104-p4').then(response => {
   if (!response.ok) throw new Error('Media index unavailable');
   return response.json();
 }).then(data => { mediaData = data; });
@@ -18,7 +17,7 @@ function fitScale(){return Math.min(1, (pageDialog.clientWidth - (innerWidth < 6
 function setScale(value){scale = Math.max(.12, Math.min(2,value));zoomImage.style.width = Math.round(2520 * scale) + 'px';zoomLevel.value = Math.round(scale * 100) + '%';}
 function showPage(index){
   currentPage = Math.max(0, Math.min(4,index));
-  zoomImage.src = currentPage === 3 ? `page-04-${p4Variant}.png?v=20261103` : `page-${String(currentPage+1).padStart(2,'0')}.png?v=20261103`;
+  zoomImage.src = `page-${String(currentPage+1).padStart(2,'0')}.png?v=20261105-assembled`;
   zoomImage.alt = `Page ${currentPage+1}: ${pageTitles[currentPage]}`;
   document.querySelector('#zoom-title').textContent = `${String(currentPage+1).padStart(2,'0')} / ${pageTitles[currentPage]}`;
   document.querySelector('#prev-page').disabled = currentPage === 0;
@@ -75,4 +74,3 @@ function updateProgress(){
 }
 addEventListener('scroll',updateProgress,{passive:true});addEventListener('resize',updateProgress);updateProgress();
 
- document.querySelectorAll('[data-p4-variant]').forEach(button=>button.addEventListener('click',()=>{p4Variant=button.dataset.p4Variant;document.querySelectorAll('[data-p4-variant]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const src=`page-04-${p4Variant}.png?v=20261103`;document.querySelector('#tangible .page-canvas>img').src=src;document.querySelectorAll('#tangible [data-page]').forEach(a=>a.href=src);if(pageDialog.open&&currentPage===3)showPage(3);}));
